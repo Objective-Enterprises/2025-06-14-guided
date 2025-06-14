@@ -1,16 +1,20 @@
 import { FoodItem } from "../../types"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function MenuPage (props: {
   items: FoodItem[]
 }) {
   const items = props.items.map(item => {
+    const url = `/menu/${item.id}`
     return (
-      <div className="menu-item" key={item.id}>
-        <Image alt={item.name} src={item.image} height={65} width={100} />
-        <h2>{item.name}</h2>
-        <p>${item.price}</p>
-      </div>
+      <Link href={url} key={item.id}>
+        <div className="menu-item">
+          <Image alt={item.name} src={item.image} height={65} width={100} />
+          <h2>{item.name}</h2>
+          <p>${item.price}</p>
+        </div>
+      </Link>
     )
   })
   return (
